@@ -16,7 +16,7 @@ echo 1 - Запустить проверку
 echo 2 - Открыть лог-файл
 echo 3 - Изменить настройки
 echo 4 - Выход
-choice /c 123 /m "Выбор:"
+choice /c 1234 /m "Выбор:"
 if %errorlevel%==1 goto check_connection
 if %errorlevel%==2 goto open_log
 if %errorlevel%==3 goto change_config
