@@ -1,10 +1,12 @@
 @echo off
-setlocal
+setlocal enabledelayedexpansion
 
-:: Настройки
-set LOGFILE=network\internet_watch\log\internet_check.log
-set INTERNET_CHECK_HOST=ya.ru
-set ROUTER_HOST=router.host
+set INI_FILE=network\internet_watch\config.ini
+
+:: Читаем настройки из config.ini
+for /f "tokens=1,2 delims==" %%a in ('findstr /b /l "LOGFILE= INTERNET_CHECK_HOST= ROUTER_HOST=" "%INI_FILE%"') do (
+    set %%a=%%b
+)
 
 :menu
 cls
@@ -12,11 +14,13 @@ echo ПРОВЕРКА ИНТЕРНЕТА:
 echo ================================
 echo 1 - Запустить проверку
 echo 2 - Открыть лог-файл
-echo 3 - Выход
+echo 3 - Изменить настройки
+echo 4 - Выход
 choice /c 123 /m "Выбор:"
 if %errorlevel%==1 goto check_connection
 if %errorlevel%==2 goto open_log
-if %errorlevel%==3 goto exit_script
+if %errorlevel%==3 goto change_config
+if %errorlevel%==4 goto exit_script
 
 :check_connection
 cls
@@ -41,10 +45,29 @@ echo.
 pause
 goto menu
 
+:change_config
+cls
+call network\internet_watch\change_config.bat %INI_FILE%
+echo.
+goto menu
+
 :exit_script
 cls
 echo.
 echo Выход из скрипта. До свидания!
 timeout /t 2 >nul
 cls
+endlocal
 exit /b
+
+:read_ini
+set "INI_FILE=%~1"
+set "SECTION=%~2"
+for /f "usebackq tokens=1,2 delims==" %%A in (`findstr /b "%SECTION%" "%INI_FILE%"`) do (
+    if "%%A"=="%SECTION%" (
+        for /f "eol=; tokens=1,2 delims==" %%X in ('findstr /b /c:"%%B" "%INI_FILE%"') do (
+            set "%%X=%%Y"
+        )
+    )
+)
+goto :eof

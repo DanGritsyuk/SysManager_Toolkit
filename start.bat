@@ -20,5 +20,6 @@ call network/net_menu_start.bat
 goto menu
 
 :exit
+cls
 echo Выход...
 timeout /t 1 >nul
