@@ -1,14 +1,17 @@
 @echo off
 setlocal enabledelayedexpansion
 
-set "login=root"
-set "host=you.host"
-set "port=22"
+set "hostName=%~1"
+set "login=%~2"
+set "host=%~3"
+set "port=%~4"
 
 cls
-echo ‚•Ž„ ‚ ZABBIX
+echo "‚•Ž„ ‚ ${%hostName%^^}"
 echo ================================
 call ssh %login%@%host% -p %port%
 chcp 866
+pause
 cls
+endlocal
 exit /b
