@@ -1,62 +1,64 @@
 @echo off
 setlocal
+chcp 65001
+cls
 
-:: ®«ãç¥­¨¥ ¯ à ¬¥âà®¢ ¨§ ®á­®¢­®£® áªà¨¯â 
+:: ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð¾Ð² Ð¸Ð· Ð¾ÑÐ½Ð¾Ð²Ð½Ð¾Ð³Ð¾ ÑÐºÑ€Ð¸Ð¿Ñ‚Ð°
 set "LOGFILE=%~1"
 set "INTERNET_CHECK_HOST=%~2"
 set "ROUTER_HOST=%~3"
 
-:: à®¢¥àª  ª®àà¥ªâ­®áâ¨ ¢å®¤­ëå ¯ à ¬¥âà®¢
+:: ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° ÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ð¾ÑÑ‚Ð¸ Ð²Ñ…Ð¾Ð´Ð½Ñ‹Ñ… Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð¾Ð²
 if not defined LOGFILE (
-    echo [Ž˜ˆŠ€] ¥ ãª § ­ ä ©« «®£ . ‡ ¢¥àè¥­¨¥ à ¡®âë.
+    echo [ÐžÐ¨Ð˜Ð‘ÐšÐ] ÐÐµ ÑƒÐºÐ°Ð·Ð°Ð½ Ñ„Ð°Ð¹Ð» Ð»Ð¾Ð³Ð°. Ð—Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð¸Ðµ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹.
     exit /b 1
 )
 if not defined INTERNET_CHECK_HOST (
-    powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% Ž˜ˆŠ€: ¥ ãª § ­ å®áâ ¤«ï ¯à®¢¥àª¨ ¨­â¥à­¥â-á®¥¤¨­¥­¨ï.') -Encoding UTF8"
-    echo [Ž˜ˆŠ€] ¥ ãª § ­ å®áâ ¤«ï ¯à®¢¥àª¨ ¨­â¥à­¥â-á®¥¤¨­¥­¨ï. ‡ ¢¥àè¥­¨¥ à ¡®âë.
+    powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% ÐžÐ¨Ð˜Ð‘ÐšÐ: ÐÐµ ÑƒÐºÐ°Ð·Ð°Ð½ Ñ…Ð¾ÑÑ‚ Ð´Ð»Ñ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ¸ Ð¸Ð½Ñ‚ÐµÑ€Ð½ÐµÑ‚-ÑÐ¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ñ.') -Encoding UTF8"
+    echo [ÐžÐ¨Ð˜Ð‘ÐšÐ] ÐÐµ ÑƒÐºÐ°Ð·Ð°Ð½ Ñ…Ð¾ÑÑ‚ Ð´Ð»Ñ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ¸ Ð¸Ð½Ñ‚ÐµÑ€Ð½ÐµÑ‚-ÑÐ¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ñ. Ð—Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð¸Ðµ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹.
     exit /b 1
 )
 if not defined ROUTER_HOST (
-    powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% Ž˜ˆŠ€: ¥ ãª § ­  ¤à¥á à®ãâ¥à .') -Encoding UTF8"
-    echo [Ž˜ˆŠ€] ¥ ãª § ­  ¤à¥á à®ãâ¥à . ‡ ¢¥àè¥­¨¥ à ¡®âë.
+    powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% ÐžÐ¨Ð˜Ð‘ÐšÐ: ÐÐµ ÑƒÐºÐ°Ð·Ð°Ð½ Ð°Ð´Ñ€ÐµÑ Ñ€Ð¾ÑƒÑ‚ÐµÑ€Ð°.') -Encoding UTF8"
+    echo [ÐžÐ¨Ð˜Ð‘ÐšÐ] ÐÐµ ÑƒÐºÐ°Ð·Ð°Ð½ Ð°Ð´Ñ€ÐµÑ Ñ€Ð¾ÑƒÑ‚ÐµÑ€Ð°. Ð—Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð¸Ðµ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹.
     exit /b 1
 )
 
-:: à®¢¥àª  ¤®áâã¯­®áâ¨ ä ©«  «®£  ¤«ï § ¯¨á¨
+:: ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð¾ÑÑ‚Ð¸ Ñ„Ð°Ð¹Ð»Ð° Ð»Ð¾Ð³Ð° Ð´Ð»Ñ Ð·Ð°Ð¿Ð¸ÑÐ¸
 >nul 2>&1 (
     (call )
 ) || (
-    echo [Ž˜ˆŠ€] ¥â ¤®áâã¯  ¤«ï § ¯¨á¨ ¢ ä ©« «®£ : %LOGFILE%
+    echo [ÐžÐ¨Ð˜Ð‘ÐšÐ] ÐÐµÑ‚ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð° Ð´Ð»Ñ Ð·Ð°Ð¿Ð¸ÑÐ¸ Ð² Ñ„Ð°Ð¹Ð» Ð»Ð¾Ð³Ð°: %LOGFILE%
     exit /b 1
 )
 
-:: ‡ ¯¨áì ¢ «®£ ­ ç «  ¢ë¯®«­¥­¨ï
-powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% à®¢¥àª  ¨­â¥à­¥â-á®¥¤¨­¥­¨ï') -Encoding UTF8" 2>nul
+:: Ð—Ð°Ð¿Ð¸ÑÑŒ Ð² Ð»Ð¾Ð³ Ð½Ð°Ñ‡Ð°Ð»Ð° Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ
+powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð¸Ð½Ñ‚ÐµÑ€Ð½ÐµÑ‚-ÑÐ¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ñ') -Encoding UTF8" 2>nul
 if %errorlevel% neq 0 (
-    echo […„“…†„…ˆ…] ¥ ã¤ «®áì § ¯¨á âì ¢ «®£. à®¤®«¦ î ¢ë¯®«­¥­¨¥...
+    echo [ÐŸÐ Ð•Ð”Ð£ÐŸÐ Ð•Ð–Ð”Ð•ÐÐ˜Ð•] ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð·Ð°Ð¿Ð¸ÑÐ°Ñ‚ÑŒ Ð² Ð»Ð¾Ð³. ÐŸÑ€Ð¾Ð´Ð¾Ð»Ð¶Ð°ÑŽ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ðµ...
 )
 
-:: à®¢¥àª  ¨­â¥à­¥â-á®¥¤¨­¥­¨ï
+:: ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð¸Ð½Ñ‚ÐµÑ€Ð½ÐµÑ‚-ÑÐ¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ñ
 ping -n 1 "%INTERNET_CHECK_HOST%" >nul 2>nul
 if %errorlevel% == 0 (
-    echo [ŽŠ] ˆ­â¥à­¥â-á®¥¤¨­¥­¨¥ ¤®áâã¯­®.
-    powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% ˆ­â¥à­¥â-á®¥¤¨­¥­¨¥ ¤®áâã¯­®.') -Encoding UTF8" 2>nul
+    echo [ÐžÐš] Ð˜Ð½Ñ‚ÐµÑ€Ð½ÐµÑ‚-ÑÐ¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð¾.
+    powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% Ð˜Ð½Ñ‚ÐµÑ€Ð½ÐµÑ‚-ÑÐ¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð¾.') -Encoding UTF8" 2>nul
 ) else (
-    echo [Ž˜ˆŠ€] ˆ­â¥à­¥â-á®¥¤¨­¥­¨¥ ®âáãâáâ¢ã¥â. à®¢¥àïî à®ãâ¥à...
-    powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% ˆ­â¥à­¥â-á®¥¤¨­¥­¨¥ ®âáãâáâ¢ã¥â. à®¢¥àïî ¤®áâã¯­®áâì à®ãâ¥à ...') -Encoding UTF8" 2>nul
+    echo [ÐžÐ¨Ð˜Ð‘ÐšÐ] Ð˜Ð½Ñ‚ÐµÑ€Ð½ÐµÑ‚-ÑÐ¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ Ð¾Ñ‚ÑÑƒÑ‚ÑÑ‚Ð²ÑƒÐµÑ‚. ÐŸÑ€Ð¾Ð²ÐµÑ€ÑÑŽ Ñ€Ð¾ÑƒÑ‚ÐµÑ€...
+    powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% Ð˜Ð½Ñ‚ÐµÑ€Ð½ÐµÑ‚-ÑÐ¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ Ð¾Ñ‚ÑÑƒÑ‚ÑÑ‚Ð²ÑƒÐµÑ‚. ÐŸÑ€Ð¾Ð²ÐµÑ€ÑÑŽ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð¾ÑÑ‚ÑŒ Ñ€Ð¾ÑƒÑ‚ÐµÑ€Ð°...') -Encoding UTF8" 2>nul
 
-    :: à®¢¥àª  à®ãâ¥à 
+    :: ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ñ€Ð¾ÑƒÑ‚ÐµÑ€Ð°
     ping -n 1 "%ROUTER_HOST%" >nul 2>nul
     if %errorlevel% == 0 (
-        echo [‚ˆŒ€ˆ…] ®ãâ¥à ¤®áâã¯¥­, ­® ¨­â¥à­¥â ®âáãâáâ¢ã¥â.
-        powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% ®ãâ¥à ¤®áâã¯¥­, ­® ¨­â¥à­¥â-á®¥¤¨­¥­¨¥ ®âáãâáâ¢ã¥â.') -Encoding UTF8" 2>nul
+        echo [Ð’ÐÐ˜ÐœÐÐÐ˜Ð•] Ð Ð¾ÑƒÑ‚ÐµÑ€ Ð´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½, Ð½Ð¾ Ð¸Ð½Ñ‚ÐµÑ€Ð½ÐµÑ‚ Ð¾Ñ‚ÑÑƒÑ‚ÑÑ‚Ð²ÑƒÐµÑ‚.
+        powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% Ð Ð¾ÑƒÑ‚ÐµÑ€ Ð´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½, Ð½Ð¾ Ð¸Ð½Ñ‚ÐµÑ€Ð½ÐµÑ‚-ÑÐ¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ Ð¾Ñ‚ÑÑƒÑ‚ÑÑ‚Ð²ÑƒÐµÑ‚.') -Encoding UTF8" 2>nul
     ) else (
-        echo [Šˆ’ˆ—Ž] ®ãâ¥à ­¥¤®áâã¯¥­. ¥à¥§ ¯ãáª î á¥áá¨î...
-        powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% ®ãâ¥à ­¥¤®áâã¯¥­. ¥à¥§ ¯ãáª î á¥áá¨î...') -Encoding UTF8" 2>nul
+        echo [ÐšÐ Ð˜Ð¢Ð˜Ð§ÐÐž] Ð Ð¾ÑƒÑ‚ÐµÑ€ Ð½ÐµÐ´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½. ÐŸÐµÑ€ÐµÐ·Ð°Ð¿ÑƒÑÐºÐ°ÑŽ ÑÐµÑÑÐ¸ÑŽ...
+        powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% Ð Ð¾ÑƒÑ‚ÐµÑ€ Ð½ÐµÐ´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½. ÐŸÐµÑ€ÐµÐ·Ð°Ð¿ÑƒÑÐºÐ°ÑŽ ÑÐµÑÑÐ¸ÑŽ...') -Encoding UTF8" 2>nul
     )
 
-    echo ‚ë¯®«­¥­¨¥ ª®¬ ­¤ ¢®ááâ ­®¢«¥­¨ï á¥â¨...
-    powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% ‚ë¯®«­ïî ª®¬ ­¤ë ipconfig /release, /flushdns, /renew...') -Encoding UTF8" 2>nul
+    echo Ð’Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ðµ ÐºÐ¾Ð¼Ð°Ð½Ð´ Ð²Ð¾ÑÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ ÑÐµÑ‚Ð¸...
+    powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% Ð’Ñ‹Ð¿Ð¾Ð»Ð½ÑÑŽ ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ ipconfig /release, /flushdns, /renew...') -Encoding UTF8" 2>nul
     powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('---------------------') -Encoding UTF8" 2>nul
 
     chcp 65001 >nul
@@ -66,8 +68,8 @@ if %errorlevel% == 0 (
     chcp 866 >nul
 
     powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('---------------------') -Encoding UTF8" 2>nul
-    echo [‡€‚…˜…Ž] Š®¬ ­¤ë ¢®ááâ ­®¢«¥­¨ï ¢ë¯®«­¥­ë.
-    powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% Š®¬ ­¤ë ¢ë¯®«­¥­ë.') -Encoding UTF8" 2>nul
+    echo [Ð—ÐÐ’Ð•Ð Ð¨Ð•ÐÐž] ÐšÐ¾Ð¼Ð°Ð½Ð´Ñ‹ Ð²Ð¾ÑÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ñ‹.
+    powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% ÐšÐ¾Ð¼Ð°Ð½Ð´Ñ‹ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ñ‹.') -Encoding UTF8" 2>nul
 )
 
 powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('') -Encoding UTF8" 2>nul

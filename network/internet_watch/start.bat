@@ -1,22 +1,23 @@
 @echo off
 setlocal enabledelayedexpansion
-
+chcp 65001
+cls
 set INI_FILE=network\internet_watch\config.ini
 
-:: —¨â ¥¬ ­ áâà®©ª¨ ¨§ config.ini
+:: Ð§Ð¸Ñ‚Ð°ÐµÐ¼ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð¸Ð· config.ini
 for /f "tokens=1,2 delims==" %%a in ('findstr /b /l "LOGFILE= INTERNET_CHECK_HOST= ROUTER_HOST=" "%INI_FILE%"') do (
     set %%a=%%b
 )
 
 :menu
 cls
-echo Ž‚…Š€ ˆ’……’€:
+echo ÐŸÐ ÐžÐ’Ð•Ð ÐšÐ Ð˜ÐÐ¢Ð•Ð ÐÐ•Ð¢Ð:
 echo ================================
-echo 1 - ‡ ¯ãáâ¨âì ¯à®¢¥àªã
-echo 2 - Žâªàëâì «®£-ä ©«
-echo 3 - ˆ§¬¥­¨âì ­ áâà®©ª¨
-echo 4 - ‚ëå®¤
-choice /c 1234 /m "‚ë¡®à:"
+echo 1 - Ð—Ð°Ð¿ÑƒÑÑ‚Ð¸Ñ‚ÑŒ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÑƒ
+echo 2 - ÐžÑ‚ÐºÑ€Ñ‹Ñ‚ÑŒ Ð»Ð¾Ð³-Ñ„Ð°Ð¹Ð»
+echo 3 - Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸
+echo 4 - Ð’Ñ‹Ñ…Ð¾Ð´
+choice /c 1234 /m "Ð’Ñ‹Ð±Ð¾Ñ€:"
 if %errorlevel%==1 goto check_connection
 if %errorlevel%==2 goto open_log
 if %errorlevel%==3 goto change_config
@@ -25,7 +26,7 @@ if %errorlevel%==4 goto exit_script
 :check_connection
 cls
 echo.
-echo ‡ ¯ãáª ¯à®¢¥àª¨ ¨­â¥à­¥â-á®¥¤¨­¥­¨ï...
+echo Ð—Ð°Ð¿ÑƒÑÐº Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ¸ Ð¸Ð½Ñ‚ÐµÑ€Ð½ÐµÑ‚-ÑÐ¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ñ...
 echo.
 call network\internet_watch\check_connection.bat %LOGFILE% %INTERNET_CHECK_HOST% %ROUTER_HOST%
 echo.
@@ -37,9 +38,9 @@ cls
 echo.
 if exist "%LOGFILE%" (
     start notepad.exe "%LOGFILE%"
-    echo ‹®£-ä ©« ®âªàëâ ¢ Notepad.
+    echo Ð›Ð¾Ð³-Ñ„Ð°Ð¹Ð» Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚ Ð² Notepad.
 ) else (
-    echo Ž˜ˆŠ€: ‹®£-ä ©« ­¥ ­ ©¤¥­: %LOGFILE%
+    echo ÐžÐ¨Ð˜Ð‘ÐšÐ: Ð›Ð¾Ð³-Ñ„Ð°Ð¹Ð» Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½: %LOGFILE%
 )
 echo.
 pause
@@ -54,7 +55,7 @@ goto menu
 :exit_script
 cls
 echo.
-echo ‚ëå®¤ ¨§ áªà¨¯â . „® á¢¨¤ ­¨ï!
+echo Ð’Ñ‹Ñ…Ð¾Ð´ Ð¸Ð· ÑÐºÑ€Ð¸Ð¿Ñ‚Ð°. Ð”Ð¾ ÑÐ²Ð¸Ð´Ð°Ð½Ð¸Ñ!
 timeout /t 2 >nul
 cls
 endlocal

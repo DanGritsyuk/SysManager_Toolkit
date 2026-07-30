@@ -1,28 +1,29 @@
 @echo off
+chcp 65001
 setlocal enabledelayedexpansion
 
 :menu
 cls
-echo СПИСОК ПОДКЛЮЧЕНИЙ:
+echo ╨б╨Я╨Ш╨б╨Ю╨Ъ ╨Я╨Ю╨Ф╨Ъ╨Ы╨о╨з╨Х╨Э╨Ш╨Щ:
 echo ================================
 
-:: Читаем файл подключений и строим меню
+:: ╨з╨╕╤В╨░╨╡╨╝ ╤Д╨░╨╣╨╗ ╨┐╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╨╣ ╨╕ ╤Б╤В╤А╨╛╨╕╨╝ ╨╝╨╡╨╜╤О
 set "count=1"
 for /f "usebackq tokens=1-4 delims=," %%a in ("connections\connections.txt") do (
     call :print_line %%a
     set /a count+=1
 )
 set /a back_option=%count%
-echo %back_option% - Назад
+echo %back_option% - ╨Э╨░╨╖╨░╨┤
 
-choice /c 1234567890 /n /m "Выбор: "
+choice /c 1234567890 /n /m "╨Т╤Л╨▒╨╛╤А: "
 if %errorlevel%==%back_option% goto actionBack
 if %errorlevel% gtr %back_option% goto menu
 
-:: Извлекаем параметры выбранного подключения
+:: ╨Ш╨╖╨▓╨╗╨╡╨║╨░╨╡╨╝ ╨┐╨░╤А╨░╨╝╨╡╤В╤А╤Л ╨▓╤Л╨▒╤А╨░╨╜╨╜╨╛╨│╨╛ ╨┐╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╤П
 set "line_num=%errorlevel%"
 
-:: Используем временный файл для надёжности
+:: ╨Ш╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╨╝ ╨▓╤А╨╡╨╝╨╡╨╜╨╜╤Л╨╣ ╤Д╨░╨╣╨╗ ╨┤╨╗╤П ╨╜╨░╨┤╤С╨╢╨╜╨╛╤Б╤В╨╕
 set "temp_file=%temp%\connections_temp.txt"
 findstr /n . "connections\connections.txt" > "%temp_file%"
 
@@ -38,17 +39,17 @@ del "%temp_file%" 2>nul
 goto start_ssh
 
 :start_ssh
-echo Подключение к: !hostName! (!host!:!port!, пользователь: !login!)
+echo ╨Я╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╨╡ ╨║: !hostName! (!host!:!port!, ╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╤В╨╡╨╗╤М: !login!)
 if not exist "connections\ssh_connect.bat" (
-    echo Ошибка: Файл ssh_connect.bat не найден!
+    echo ╨Ю╤И╨╕╨▒╨║╨░: ╨д╨░╨╣╨╗ ssh_connect.bat ╨╜╨╡ ╨╜╨░╨╣╨┤╨╡╨╜!
     pause
     goto menu
 )
 call connections/ssh_connect.bat !hostName! !login! !host! !port!
 if !errorlevel! neq 0 (
-    echo Ошибка подключения. Проверьте параметры.
+    echo ╨Ю╤И╨╕╨▒╨║╨░ ╨┐╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╤П. ╨Я╤А╨╛╨▓╨╡╤А╤М╤В╨╡ ╨┐╨░╤А╨░╨╝╨╡╤В╤А╤Л.
 ) else (
-    echo Подключение завершено.
+    echo ╨Я╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╨╡ ╨╖╨░╨▓╨╡╤А╤И╨╡╨╜╨╛.
 )
 pause
 goto menu

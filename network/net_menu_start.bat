@@ -1,16 +1,23 @@
-cls
 @echo off
+chcp 65001
+cls
 :menu 
-echo ëèàëéä ëäêàèíéÇ:
+echo –°–ü–ò–°–û–ö –°–ö–†–ò–ü–¢–û–í:
 echo ================================
-echo 1 - è‡Æ¢•‡™† à≠‚•‡≠•‚†
-echo 2 - ç†ß†§
-choice /c 12 /m "ÇÎ°Æ‡:"
+echo 1 - –ü—Ä–æ–≤–µ—Ä–∫–∞ –ò–Ω—Ç–µ—Ä–Ω–µ—Ç–∞
+echo 2 - ARP-—Ç–∞–±–ª–∏—Ü–∞
+echo 3 - –ù–∞–∑–∞–¥
+choice /c 123 /m "–í—ã–±–æ—Ä:"
 if %errorlevel%==1 goto action1
-if %errorlevel%==2 goto actionBack
+if %errorlevel%==2 goto action2
+if %errorlevel%==3 goto actionBack
 
 :action1
 call network/internet_watch/start.bat
+goto menu
+
+:action2
+call network/arp/start.bat
 goto menu
 
 :actionBack

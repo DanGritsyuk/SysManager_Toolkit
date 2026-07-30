@@ -1,12 +1,13 @@
-cls
 @echo off
+chcp 65001
+cls
 :menu 
-echo ‚›Ž ‘–…€ˆŸ:
+echo Ð’Ð«Ð‘ÐžÐ  Ð¡Ð¦Ð•ÐÐÐ Ð˜Ð¯:
 echo ================================
-echo 1 - SSH ¯®¤ª«îç¥­¨ï
-echo 2 - ‘æ¥­ à¨¨ á¥â¨
-echo 3 - ‚ëå®¤
-choice /c 123 /m "‚ë¡®à:"
+echo 1 - SSH Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ñ
+echo 2 - Ð¡Ñ†ÐµÐ½Ð°Ñ€Ð¸Ð¸ ÑÐµÑ‚Ð¸
+echo 3 - Ð’Ñ‹Ñ…Ð¾Ð´
+choice /c 123 /m "Ð’Ñ‹Ð±Ð¾Ñ€:"
 if %errorlevel%==1 goto action1
 if %errorlevel%==2 goto action2
 if %errorlevel%==3 goto exit
@@ -21,5 +22,5 @@ goto menu
 
 :exit
 cls
-echo ‚ëå®¤...
+echo Ð’Ñ‹Ñ…Ð¾Ð´...
 timeout /t 1 >nul

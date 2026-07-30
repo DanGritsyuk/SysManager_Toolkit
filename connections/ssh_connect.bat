@@ -1,4 +1,5 @@
 @echo off
+chcp 65001
 setlocal enabledelayedexpansion
 
 set "hostName=%~1"
@@ -7,10 +8,10 @@ set "host=%~3"
 set "port=%~4"
 
 cls
-echo "‚•Ž„ ‚ ${%hostName%^^}"
+echo "Ð’Ð¥ÐžÐ” Ð’ ${%hostName%^^}"
 echo ================================
 call ssh %login%@%host% -p %port%
-chcp 866
+chcp 65001
 pause
 cls
 endlocal
