@@ -1,16 +1,17 @@
-@echo off
-chcp 65001
 cls
+@echo off
 :menu 
-echo Ð’Ð«Ð‘ÐžÐ  Ð¡Ð¦Ð•ÐÐÐ Ð˜Ð¯:
+echo ‚›Ž ‘–…€ˆŸ:
 echo ================================
-echo 1 - SSH Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ñ
-echo 2 - Ð¡Ñ†ÐµÐ½Ð°Ñ€Ð¸Ð¸ ÑÐµÑ‚Ð¸
-echo 3 - Ð’Ñ‹Ñ…Ð¾Ð´
-choice /c 123 /m "Ð’Ñ‹Ð±Ð¾Ñ€:"
+echo 1 - SSH ¯®¤ª«îç¥­¨ï
+echo 2 - ‘æ¥­ à¨¨ á¥â¨
+echo 3 - ‘¨áâ¥¬­ë¥ ãâ¨«¨âë
+echo 0 - ‚ëå®¤
+choice /c 1230 /m "‚ë¡®à:"
 if %errorlevel%==1 goto action1
 if %errorlevel%==2 goto action2
-if %errorlevel%==3 goto exit
+if %errorlevel%==3 goto action3
+if %errorlevel%==4 goto exit
 
 :action1
 call connections/ssh_menu_start.bat
@@ -20,7 +21,11 @@ goto menu
 call network/net_menu_start.bat
 goto menu
 
+:action3
+call system/system_menu_start.bat
+goto menu
+
 :exit
 cls
-echo Ð’Ñ‹Ñ…Ð¾Ð´...
+echo ‚ëå®¤...
 timeout /t 1 >nul

@@ -1,3 +1,6 @@
 network/internet_watch/log/
 network/arp/tables/
 connections/connections.txt
+system/disk_check/reports
+system/sysinfo/reports
+system/temp_cleanup/logs
