@@ -26,8 +26,8 @@ echo --------------------------------
 echo 1 - INTERNET_CHECK_HOST
 echo 2 - ROUTER_HOST
 echo 3 - Оба параметра
-echo 4 - Выход
-choice /c 1234 /m "Выбор:"
+echo 0 - Выход
+choice /c 1230 /m "Выбор:"
 if %errorlevel%==1 goto change_internet
 if %errorlevel%==2 goto change_router
 if %errorlevel%==3 goto change_both

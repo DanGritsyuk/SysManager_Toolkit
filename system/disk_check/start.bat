@@ -10,8 +10,8 @@ echo ================================
 echo 1 - Показать состояние дисков
 echo 2 - Сохранить отчёт в файл
 echo 3 - Открыть папку с отчётами
-echo 4 - Назад
-choice /c 1234 /m "Выбор:"
+echo 0 - Назад
+choice /c 1230 /m "Выбор:"
 if %errorlevel%==1 goto show
 if %errorlevel%==2 goto save
 if %errorlevel%==3 goto openReports

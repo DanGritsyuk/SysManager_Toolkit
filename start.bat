@@ -1,31 +1,35 @@
-cls
 @echo off
+chcp 65001 >nul 2>&1
+cls
+title SysManager Toolkit
+
 :menu 
-echo ‚›Ž ‘–…€ˆŸ:
+echo Ð’Ð«Ð‘ÐžÐ  Ð¡Ð¦Ð•ÐÐÐ Ð˜Ð¯:
 echo ================================
-echo 1 - SSH ¯®¤ª«îç¥­¨ï
-echo 2 - ‘æ¥­ à¨¨ á¥â¨
-echo 3 - ‘¨áâ¥¬­ë¥ ãâ¨«¨âë
-echo 0 - ‚ëå®¤
-choice /c 1230 /m "‚ë¡®à:"
+echo 1 - SSH Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ñ
+echo 2 - Ð¡Ñ†ÐµÐ½Ð°Ñ€Ð¸Ð¸ ÑÐµÑ‚Ð¸
+echo 3 - Ð¡Ð¸ÑÑ‚ÐµÐ¼Ð½Ñ‹Ðµ ÑƒÑ‚Ð¸Ð»Ð¸Ñ‚Ñ‹
+echo 0 - Ð’Ñ‹Ñ…Ð¾Ð´
+choice /c 1230 /m "Ð’Ñ‹Ð±Ð¾Ñ€:"
 if %errorlevel%==1 goto action1
 if %errorlevel%==2 goto action2
 if %errorlevel%==3 goto action3
 if %errorlevel%==4 goto exit
 
 :action1
-call connections/ssh_menu_start.bat
+call connections\ssh_menu_start.bat
 goto menu
 
 :action2
-call network/net_menu_start.bat
+call network\net_menu_start.bat
 goto menu
 
 :action3
-call system/system_menu_start.bat
+call system\system_menu_start.bat
 goto menu
 
 :exit
 cls
-echo ‚ëå®¤...
+echo Ð’Ñ‹Ñ…Ð¾Ð´...
 timeout /t 1 >nul
+exit /b 0

@@ -11,9 +11,9 @@ echo.
 echo 1 - Запустить сканирование (заполнение ARP)
 echo 2 - Очистить ARP-таблицу
 echo 3 - Открыть папку с таблицами
-echo 4 - Назад
+echo 0 - Назад
 echo.
-choice /c 1234 /m "Выбор:"
+choice /c 1230 /m "Выбор:"
 if %errorlevel%==1 goto scan
 if %errorlevel%==2 goto clear_arp
 if %errorlevel%==3 goto open_folder

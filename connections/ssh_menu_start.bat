@@ -1,5 +1,5 @@
 @echo off
-chcp 65001
+chcp 65001 >nul 2>&1
 setlocal enabledelayedexpansion
 
 :menu
@@ -7,45 +7,61 @@ cls
 echo СПИСОК ПОДКЛЮЧЕНИЙ:
 echo ================================
 
-:: Читаем файл подключений и строим меню
 set "count=1"
 for /f "usebackq tokens=1-4 delims=," %%a in ("connections\connections.txt") do (
-    call :print_line %%a
+    echo !count! - %%a
     set /a count+=1
 )
-set /a back_option=%count%
-echo %back_option% - Назад
+
+set /a last_conn=!count!-1
+echo 0 - Назад
 
 choice /c 1234567890 /n /m "Выбор: "
-if %errorlevel%==%back_option% goto actionBack
-if %errorlevel% gtr %back_option% goto menu
 
-:: Извлекаем параметры выбранного подключения
-set "line_num=%errorlevel%"
+if !errorlevel!==10 goto actionBack
+if !errorlevel! gtr !last_conn! goto menu
 
-:: Используем временный файл для надёжности
-set "temp_file=%temp%\connections_temp.txt"
-findstr /n . "connections\connections.txt" > "%temp_file%"
+set "line_num=!errorlevel!"
 
-for /f "tokens=1-5 delims=:," %%i in ('findstr "^%line_num%:" "%temp_file%"') do (
-    set "hostName=%%j"
-    set "login=%%k"
-    set "host=%%l"
-    set "port=%%m"
+:: --- НАДЁЖНОЕ ИЗВЛЕЧЕНИЕ ПАРАМЕТРОВ ---
+set "hostName="
+set "login="
+set "host="
+set "port="
+set "count=1"
+
+for /f "usebackq tokens=1-4 delims=," %%a in ("connections\connections.txt") do (
+    if !count! equ !line_num! (
+        set "hostName=%%a"
+        set "login=%%b"
+        set "host=%%c"
+        set "port=%%d"
+    )
+    set /a count+=1
 )
-
-del "%temp_file%" 2>nul
+:: --------------------------------------
 
 goto start_ssh
 
 :start_ssh
-echo Подключение к: !hostName! (!host!:!port!, пользователь: !login!)
+if "!hostName!"=="" (
+    echo Ошибка: Не удалось прочитать данные подключения №!line_num!
+    echo Проверьте connections.txt
+    pause
+    goto menu
+)
+
+echo ВХОД В: !hostName!
+echo ================================
 if not exist "connections\ssh_connect.bat" (
     echo Ошибка: Файл ssh_connect.bat не найден!
     pause
     goto menu
 )
-call connections/ssh_connect.bat !hostName! !login! !host! !port!
+
+:: Передаем параметры в кавычках, чтобы пробелы не ломали аргументы
+call connections\ssh_connect.bat "!hostName!" "!login!" "!host!" "!port!"
+
 if !errorlevel! neq 0 (
     echo Ошибка подключения. Проверьте параметры.
 ) else (
@@ -57,8 +73,4 @@ goto menu
 :actionBack
 cls
 endlocal
-exit /b
-
-:print_line
-echo %count% - %1
-goto :eof
+exit /b 0
