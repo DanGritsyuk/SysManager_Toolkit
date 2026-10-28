@@ -2,7 +2,8 @@
     [string]$FilePath,
     [string]$Action,
     [int]$Lines = 50,
-    [string]$SearchTerm = ""
+    [string]$SearchTerm = "",
+    [string]$Encoding = "UTF8"
 )
 
 $ErrorActionPreference = 'SilentlyContinue'
@@ -21,8 +22,8 @@ Write-Host " Файл: $FilePath" -ForegroundColor Cyan
 Write-Host " Размер: $sizeMB МБ | Изменен: $lastWrite" -ForegroundColor DarkGray
 Write-Host "==========================================================" -ForegroundColor DarkGray
 
-# Для современных логов используем UTF-8
-$enc = "UTF8"
+# Кодировка приходит параметром; по умолчанию — UTF8
+$enc = $Encoding
 
 try {
     switch ($Action) {

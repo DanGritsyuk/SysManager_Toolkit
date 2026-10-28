@@ -39,7 +39,7 @@ if %errorlevel% neq 0 (
 )
 
 :: Проверка интернет-соединения
-ping -n 1 "%INTERNET_CHECK_HOST%" >nul 2>nul
+ping -n 1 -w 1000 "%INTERNET_CHECK_HOST%" >nul 2>nul
 if %errorlevel% == 0 (
     echo [ОК] Интернет-соединение доступно.
     powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% Интернет-соединение доступно.') -Encoding UTF8" 2>nul
@@ -48,7 +48,7 @@ if %errorlevel% == 0 (
     powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% Интернет-соединение отсутствует. Проверяю доступность роутера...') -Encoding UTF8" 2>nul
 
     :: Проверка роутера
-    ping -n 1 "%ROUTER_HOST%" >nul 2>nul
+    ping -n 1 -w 1000 "%ROUTER_HOST%" >nul 2>nul
     if %errorlevel% == 0 (
         echo [ВНИМАНИЕ] Роутер доступен, но интернет отсутствует.
         powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('%date% %time% Роутер доступен, но интернет-соединение отсутствует.') -Encoding UTF8" 2>nul
@@ -65,7 +65,6 @@ if %errorlevel% == 0 (
     ipconfig /release >> "%LOGFILE%" 2>> "%LOGFILE%"
     ipconfig /flushdns >> "%LOGFILE%" 2>> "%LOGFILE%"
     ipconfig /renew >> "%LOGFILE%" 2>> "%LOGFILE%"
-    chcp 866 >nul
 
     powershell -Command "Add-Content -Path '%LOGFILE%' -Value ('---------------------') -Encoding UTF8" 2>nul
     echo [ЗАВЕРШЕНО] Команды восстановления выполнены.

@@ -1,6 +1,35 @@
+# ---- SysManager Toolkit: артефакты выполнения ----
+
+# Сеть
 network/internet_watch/log/
 network/arp/tables/
+network/port_owner/logs/          # на будущее, если добавите логирование
+
+# SSH
 connections/connections.txt
-system/disk_check/reports
-system/sysinfo/reports
-system/temp_cleanup/logs
+
+# Системные утилиты
+system/disk_check/reports/
+system/sysinfo/reports/
+system/temp_cleanup/logs/
+system/service_manager/logs/      # на будущее
+system/disk_top/logs/             # на будущее
+system/log_reader/logs/           # на будущее
+
+# Общая папка отчётов (сюда пишет collect.ps1)
+reports/
+system/collect/reports/           # если поменяете путь на локальный
+
+# ---- Мусор, который не нужен в репозитории ----
+*.log
+*.tmp
+*.zip
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# ---- Редакторы и IDE ----
+.vscode/
+.idea/
+*.swp
+*~

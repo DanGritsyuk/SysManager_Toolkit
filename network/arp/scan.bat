@@ -1,4 +1,4 @@
-﻿<# : BAT+PowerShell hybrid script
+<# : BAT+PowerShell hybrid script
 @echo off
 chcp 65001 >nul
 setlocal enabledelayedexpansion
@@ -41,6 +41,7 @@ echo.
 echo ============================================
 echo            Полная ARP-таблица
 echo ============================================
+cls
 arp -a
 
 :: Сохраняем результат в файл в папку tables с меткой времени
@@ -148,7 +149,7 @@ $jobs = $range | ForEach-Object {
     Test-Connection -ComputerName $_ -Count 1 -AsJob -ErrorAction SilentlyContinue
 }
 
-$jobs | Wait-Job -Timeout 4 | Out-Null
+$jobs | Wait-Job -Timeout 10 | Out-Null
 $jobs | Remove-Job -Force
 
 Write-Host 'Сканирование завершено.'

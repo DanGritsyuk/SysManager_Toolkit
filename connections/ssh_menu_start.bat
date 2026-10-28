@@ -1,72 +1,48 @@
 @echo off
 chcp 65001 >nul 2>&1
 setlocal enabledelayedexpansion
+cd /d "%~dp0.."
 
 :menu
 cls
 echo СПИСОК ПОДКЛЮЧЕНИЙ:
 echo ================================
-
-set "count=1"
+set "count=0"
 for /f "usebackq tokens=1-4 delims=," %%a in ("connections\connections.txt") do (
-    echo !count! - %%a
     set /a count+=1
+    echo !count! - %%a
 )
-
-set /a last_conn=!count!-1
+if !count! equ 0 (
+    echo Нет подключений. Добавьте строки в connections\connections.txt
+    pause
+    exit /b
+)
 echo 0 - Назад
+echo.
+set /p "choice=Выбор: "
+if "!choice!"=="0" goto actionBack
+set /a num=!choice! 2>nul
+if !num! lss 1 goto menu
+if !num! gtr !count! goto menu
 
-choice /c 1234567890 /n /m "Выбор: "
-
-if !errorlevel!==10 goto actionBack
-if !errorlevel! gtr !last_conn! goto menu
-
-set "line_num=!errorlevel!"
-
-:: --- НАДЁЖНОЕ ИЗВЛЕЧЕНИЕ ПАРАМЕТРОВ ---
-set "hostName="
-set "login="
-set "host="
-set "port="
-set "count=1"
-
+set "line_num=!num!"
+set "hostName=" & set "login=" & set "host=" & set "port="
+set "c=0"
 for /f "usebackq tokens=1-4 delims=," %%a in ("connections\connections.txt") do (
-    if !count! equ !line_num! (
+    set /a c+=1
+    if !c! equ !line_num! (
         set "hostName=%%a"
         set "login=%%b"
         set "host=%%c"
         set "port=%%d"
     )
-    set /a count+=1
 )
-:: --------------------------------------
-
-goto start_ssh
-
-:start_ssh
 if "!hostName!"=="" (
-    echo Ошибка: Не удалось прочитать данные подключения №!line_num!
-    echo Проверьте connections.txt
+    echo Ошибка: не удалось прочитать данные подключения.
     pause
     goto menu
 )
-
-echo ВХОД В: !hostName!
-echo ================================
-if not exist "connections\ssh_connect.bat" (
-    echo Ошибка: Файл ssh_connect.bat не найден!
-    pause
-    goto menu
-)
-
-:: Передаем параметры в кавычках, чтобы пробелы не ломали аргументы
-call connections\ssh_connect.bat "!hostName!" "!login!" "!host!" "!port!"
-
-if !errorlevel! neq 0 (
-    echo Ошибка подключения. Проверьте параметры.
-) else (
-    echo Подключение завершено.
-)
+call "%~dp0ssh_connect.bat" "!hostName!" "!login!" "!host!" "!port!"
 pause
 goto menu
 
